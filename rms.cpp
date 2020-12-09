@@ -20,7 +20,7 @@ int main()
 	ifstream inFile;
 	inFile.open("input1.txt");
 	inFile >> temp >> numTask;
-	cout << numTask << "\n";
+	//cout << numTask << "\n";
 	
 	vector <int> exTimes;
 	vector <int> periods;
@@ -35,8 +35,10 @@ int main()
 
 	//cout << getLcm (periods) << "\n";
 	superP = getLcm(periods);
-	getPriority(periods);
-	
+	priority = getPriority(periods);
+	cout << superP << "\n";
+	for (auto x : priority) cout << x << " ";
+	cout << "\n";
 	return 0;
 	
 }
@@ -45,51 +47,27 @@ vector<int> getPriority(vector <int> _periods)
 {
 	vector <int> pPriority = _periods;
 	vector <int> priority;
-	
-	for (int i = 0; i < pPriority.size(); i++) priority.push_back(i);
-	
-	/*int currentNum = -1;
-	int currentInd;
-	int lastNum = -1;
-	
-	for (int k = 0; k < _periods.size(); k++)
-	{
-		for (int i = 0; i < _periods.size(); i++)
-		{
-			if (currentNum == -1 || (_periods[i] < currentNum && _periods[i] != lastNum))
-			{
-				currentNum = _periods[i];
-				currentInd = i;
-			}	
-		}
-		lastNum = currentNum;
-		priority.push_back(currentInd);
-	}
-	
-	cout << priority[0];
-	cout << priority[1];
-	cout << priority[2];
-	cout << "\n";
-	
-	return priority;*/
-	
+	vector <int> indList;
+
 	sort(pPriority.begin(), pPriority.end());
-	
-	for (auto x : pPriority) cout << x << " ";
-	#return pPriority;
-	
+
 	for (int i = 0; i < pPriority.size(); i++)
-	{
-		
+	{	
 		for (int j = 0; j < pPriority.size(); j++)
 		{
-			
-			if
-			
-		}
-		
+			if (pPriority[i] == _periods[j] && count(indList.begin(), indList.end(), j) == 0)
+			{
+				priority.push_back(j);
+				indList.push_back(j);
+				break;
+			}
+		}	
 	}
-
+		
+	//for (auto x : priority) cout << x << " ";
+	//cout << "\n";
+	
+	return priority;
 }
 
 int getLcm(vector <int> _periods)
