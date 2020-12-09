@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ int main()
 	ifstream inFile;
 	inFile.open("input1.txt");
 	inFile >> temp >> numTask;
-	//cout << numTask << "\n";
+	cout << numTask << "\n";
 	
 	vector <int> exTimes;
 	vector <int> periods;
@@ -42,8 +43,12 @@ int main()
 
 vector<int> getPriority(vector <int> _periods)
 {
+	vector <int> pPriority = _periods;
 	vector <int> priority;
-	int currentNum = -1;
+	
+	for (int i = 0; i < pPriority.size(); i++) priority.push_back(i);
+	
+	/*int currentNum = -1;
 	int currentInd;
 	int lastNum = -1;
 	
@@ -66,7 +71,24 @@ vector<int> getPriority(vector <int> _periods)
 	cout << priority[2];
 	cout << "\n";
 	
-	return priority;
+	return priority;*/
+	
+	sort(pPriority.begin(), pPriority.end());
+	
+	for (auto x : pPriority) cout << x << " ";
+	#return pPriority;
+	
+	for (int i = 0; i < pPriority.size(); i++)
+	{
+		
+		for (int j = 0; j < pPriority.size(); j++)
+		{
+			
+			if
+			
+		}
+		
+	}
 
 }
 
