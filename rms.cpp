@@ -32,13 +32,83 @@ int main()
 		exTimes.push_back(exTime);
 		periods.push_back(period);
 	}
-
 	//cout << getLcm (periods) << "\n";
 	superP = getLcm(periods);
 	priority = getPriority(periods);
 	cout << superP << "\n";
 	for (auto x : priority) cout << x << " ";
 	cout << "\n";
+	
+	vector <int > taskTimes = exTimes;
+	//vector <int> periodTimes = periods;
+	//int timeStep = 0;
+	
+	cout << "-----------------------------\n";
+	
+	for (int timeStep = 0; timeStep < superP; timeStep++)
+	{
+		
+		for (int i = 0; i < periods.size(); i++)
+		{
+			if (timeStep % periods[i] == 0 && taskTimes[i] != 0 && timeStep != 0)
+			{
+				cout << timeStep;
+				cout << " Task " << i+1 << " Misses\n";
+			}
+			if (timeStep % periods[i] == 0 && timeStep != 0)
+			{
+				//cout << "HERE\n";
+				taskTimes[i] = exTimes[i];
+				//cout<< " Task " << i << " Completes\n";
+			}
+			
+		}
+		
+		for (auto x : priority)
+		{
+			if (taskTimes[x] != 0)
+			{
+				taskTimes[x] -= 1;
+				cout << timeStep;
+				cout << " Task " << x+1 << " Executes\n";
+				
+				
+				if (taskTimes[x] == 0)
+				{
+					cout << timeStep;
+					cout << " Task " << x+1 << " Completes\n";
+				}
+				
+				break;
+			}
+			
+		}
+		
+		
+		
+		
+		/*cout << "\n";
+		for (auto x : taskTimes) cout << x << " ";
+		cout << "\n";*/
+		
+		
+		/*for (int i = 0; i < taskTimes.size(); i++)
+		{
+			if (taskTimes[i] == 0)
+			{
+				cout << timeStep;
+				cout << " Task " << i+1 << " Completes\n";
+			}
+		}*/
+		
+		
+	}
+	
+	cout << "-----------------------------\n";
+	
+	
+	
+	
 	return 0;
 	
 }
