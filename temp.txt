@@ -1,6 +1,0 @@
-int sumTimes = accumulate(taskTimes.begin(), taskTimes.end(), 0);
-		if (sumTimes == 0)
-		{
-			cout << timeStep;
-			cout << " Tasks Unavailable\n";
-		}

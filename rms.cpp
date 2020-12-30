@@ -18,7 +18,7 @@ int main()
 {
 	
 	ifstream inFile;
-	inFile.open("input1.txt");
+	inFile.open("input.txt");
 	inFile >> temp >> numTask;
 	//cout << numTask << "\n";
 	
@@ -35,15 +35,20 @@ int main()
 	//cout << getLcm (periods) << "\n";
 	superP = getLcm(periods);
 	priority = getPriority(periods);
-	cout << superP << "\n";
-	for (auto x : priority) cout << x << " ";
+	//cout << superP << "\n";
+	//for (auto x : priority) cout << x << " ";
 	cout << "\n";
 	
 	vector <int > taskTimes = exTimes;
 	//vector <int> periodTimes = periods;
 	//int timeStep = 0;
 	
+	//opening output file to write
+	ofstream outfile;
+	outfile.open("output_rms.txt");
+	
 	cout << "-----------------------------\n";
+	outfile << "-----------------------------\n";
 	
 	for (int timeStep = 0; timeStep < superP; timeStep++)
 	{
@@ -54,6 +59,9 @@ int main()
 			{
 				cout << timeStep;
 				cout << " Task " << i+1 << " Misses\n";
+				
+				outfile << timeStep;
+				outfile << " Task " << i+1 << " Misses\n";
 			}
 			if (timeStep % periods[i] == 0 && timeStep != 0)
 			{
@@ -72,11 +80,17 @@ int main()
 				cout << timeStep;
 				cout << " Task " << x+1 << " Executes\n";
 				
+				outfile << timeStep;
+				outfile << " Task " << x+1 << " Executes\n";
+				
 				
 				if (taskTimes[x] == 0)
 				{
 					cout << timeStep;
 					cout << " Task " << x+1 << " Completes\n";
+					
+					outfile << timeStep;
+					outfile << " Task " << x+1 << " Completes\n";
 				}
 				
 				break;
@@ -105,6 +119,10 @@ int main()
 	}
 	
 	cout << "-----------------------------\n";
+	outfile << "-----------------------------\n";
+	
+	outfile.close();
+
 	
 	
 	
