@@ -59,7 +59,7 @@ int main()
 	cout << "-----------------------------\n";
 	outfile << "-----------------------------\n";
 	
-	for (int timeStep = 0; timeStep < superP; timeStep++)
+	for (int timeStep = 0; timeStep <= superP; timeStep++)
 	{
 		
 		timeToDdl = deadlines;
@@ -104,6 +104,9 @@ int main()
 			}
 			
 		}
+		
+		//exiting loop after checking misses for last time step
+		if (timeStep == superP) break;
 		
 		for (auto x : priority)
 		{
