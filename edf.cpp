@@ -18,56 +18,54 @@ vector <int> deadlines;
 
 int main()
 {
+	//open file stream to read input file
 	ifstream inFile;
 	inFile.open("input.txt");
 	inFile >> temp >> numTask;
-	//cout << numTask << "\n";
+	cout << "\n\nNumber of Tasks: " << numTask << "\n";
 	
+	//initialise variables to store periods and execution times
 	vector <int> exTimes;
 	vector <int> periods;
 	int exTime, period;
 	
+	//store periods and execution times
 	for (int i = 0; i < numTask; i++)
 	{
 		inFile >> temp >> exTime >> period;
 		exTimes.push_back(exTime);
 		periods.push_back(period);
 	}
-	//cout << getLcm (periods) << "\n";
+	
+	//get Super Period and priorities
 	superP = getLcm(periods);
 	priority = getPriority(periods);
-	//cout << superP << "\n";
+	cout << "Super Period: " << superP << "\n\n";
+	
 	//for (auto x : priority) cout << x << " ";
-	cout << "\n";
+	//cout << "\n";
 	
+	//variable to keep track of current task time
 	vector <int > taskTimes = exTimes;
-	//vector <int> periodTimes = periods;
-	//int timeStep = 0;
-	
-	//////////////////edf code/////////////////////////////
 	
 	vector <int> deadlines = periods;
 	vector <int> timeToDdl = periods;
-	//priority = getPriority(deadlines);
 	
-	
-	
-	//opening output file to write
+	//opening output file stream to write
 	ofstream outfile;
 	outfile.open("output_edf.txt");
 	
 	cout << "-----------------------------\n";
 	outfile << "-----------------------------\n";
 	
+//////////////////edf code imlpementation/////////////////////////////
+	
 	for (int timeStep = 0; timeStep <= superP; timeStep++)
 	{
 		
 		timeToDdl = deadlines;
 		for (int d = 0; d < timeToDdl.size(); d++)
-		{
-			/*if (timeToDdl[d] != timeStep) timeToDdl[d] -= timeStep;
-			else timeToDdl[d] =*/
-			
+		{	
 			if ((timeToDdl[d] - timeStep) != 0)
 			{
 				timeToDdl[d] -= timeStep;
@@ -76,16 +74,9 @@ int main()
 		} 
 		priority = getPriority(timeToDdl);
 		
-		/*cout << "\n";
-		for (auto x : deadlines) cout << x << " ";
-		cout << "\n";*/
-		
-		/*cout << "\n";
-		for (auto x : timeToDdl) cout << x << " ";
-		cout << "\n";*/
-		
 		for (int i = 0; i < periods.size(); i++)
 		{
+			//check for misses
 			if (timeStep % periods[i] == 0 && taskTimes[i] != 0 && timeStep != 0)
 			{
 				cout << timeStep;
@@ -97,10 +88,8 @@ int main()
 			}
 			if (timeStep % periods[i] == 0 && timeStep != 0)
 			{
-				//cout << "HERE\n";
 				taskTimes[i] = exTimes[i];
 				deadlines[i] += periods[i];
-				//cout<< " Task " << i << " Completes\n";
 			}
 			
 		}
@@ -110,6 +99,7 @@ int main()
 		
 		for (auto x : priority)
 		{
+			//compute execution of tasks
 			if (taskTimes[x] != 0)
 			{
 				taskTimes[x] -= 1;
@@ -119,7 +109,7 @@ int main()
 				outfile << timeStep;
 				outfile << " Task " << x+1 << " Executes\n";
 				
-				
+				//check if a task has been completed
 				if (taskTimes[x] == 0)
 				{
 					cout << timeStep;
@@ -136,10 +126,10 @@ int main()
 			
 	}
 	
-	cout << "-----------------------------\n";
-	
+	cout << "-----------------------------\n\n\n";
 	outfile << "-----------------------------\n";
 	
+	//close output file
 	outfile.close();
 	
 	
@@ -148,6 +138,7 @@ int main()
 	
 }
 
+//function to calculate priority of tasks
 vector<int> getPriority(vector <int> _periods)
 {
 	vector <int> pPriority = _periods;
@@ -175,6 +166,7 @@ vector<int> getPriority(vector <int> _periods)
 	return priority;
 }
 
+//function to calculate LCM for Super Period
 int getLcm(vector <int> _periods)
 {
 	int lcm = _periods[0];
