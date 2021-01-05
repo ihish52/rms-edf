@@ -31,3 +31,4 @@
 19 Task 1 Executes
 20 Task 1 Misses
 -----------------------------
+Total Deadline Misses: 2

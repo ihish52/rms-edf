@@ -7,7 +7,7 @@ outfile_name = sys.argv[1]
 with open(outfile_name) as f:
 	out_f = f.read()
 	
-data = out_f.split('\n')[1:-2]
+data = out_f.split('\n')[1:-3]
 
 time_list = []
 exec_list = []

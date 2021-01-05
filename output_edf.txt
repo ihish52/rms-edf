@@ -31,3 +31,4 @@
 19 Task 2 Completes
 20 Task 3 Misses
 -----------------------------
+Total Deadline Misses: 2

@@ -10,6 +10,7 @@ int numTask;
 string temp;
 vector <int> priority;
 int superP;
+int misses = 0;
 
 int getLcm(vector <int> _periods);
 vector <int> getPriority(vector <int> _periods);
@@ -79,6 +80,8 @@ int main()
 			//check for misses
 			if (timeStep % periods[i] == 0 && taskTimes[i] != 0 && timeStep != 0)
 			{
+				misses += 1;
+				
 				cout << timeStep;
 				cout << " Task " << i+1 << " Misses\n";
 				
@@ -126,8 +129,12 @@ int main()
 			
 	}
 	
-	cout << "-----------------------------\n\n\n";
+	cout << "-----------------------------\n\n";
+	cout << "Scheduling Finishes\n\n";
+	cout << "Total Deadline Misses: " << misses << "\n\n\n";
+	
 	outfile << "-----------------------------\n";
+	outfile << "Total Deadline Misses: " << misses << "\n";
 	
 	//close output file
 	outfile.close();
